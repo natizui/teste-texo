@@ -1,14 +1,13 @@
 export class Product {
-  id: number;
 
   constructor (
-  id: number,
-  name: string,
-  quantity: number,
-  unit: string,
-  price: number,
-  perishable: boolean,
-  expirationDate: Date,
-  manifactureDate: Date,
+  public id: number,
+  public name: string,
+  public quantity: number,
+  public unit: string,
+  public price: number,
+  public perishable: boolean,
+  public expirationDate: Date,
+  public manifactureDate: Date,
   ){}
 }
