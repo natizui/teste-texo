@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
 
 import {TableModule} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -21,7 +22,8 @@ import { ProductsTableComponent } from './products/product-list/products-table/p
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    TableModule
+    TableModule,
+    ButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
