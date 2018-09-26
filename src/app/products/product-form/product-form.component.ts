@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { Product } from '../product';
 import { ProductService } from '../product.service';
@@ -15,7 +15,7 @@ export class ProductFormComponent implements OnInit{
 
   units = ['L', 'Kg', 'unidade'];
   
-  model = new Product(1, 'maçã', 1, null, 5, false, null, new Date(2018, 0, 1));
+  model = new Product();
 
   product$: Observable<Product>;
 
@@ -26,21 +26,23 @@ export class ProductFormComponent implements OnInit{
   ) {}
   
   ngOnInit(){
-    
-    this.product$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-      this.service.getProduct(params.get('id')))
-    );
-
-    this.product$.subscribe(prod => this.model = prod);
-
+    const href = this.router.url;
+    const re = /[0-9]$/;
+    const result = href.match(re);
+    if(result){
+      //takes the id passed by the route map and uses it to get the product that has that id
+      this.product$ = this.route.paramMap.pipe(
+        switchMap((params: ParamMap) =>
+        this.service.getProduct(params.get('id')))
+      );
+      //update model with product data if necessary
+      this.product$.subscribe(prod => this.model = prod);
+    }
   }
   
   onSubmit() { 
-    //salvar edição
-
-    //salvar novo
-    this.model.id = localStorage.length + 1;
-    localStorage.setItem(this.model.id.toString(), JSON.stringify(this.model)); 
+    const key = (localStorage.length + 1).toString();
+    this.service.saveProduct(key, this.model);
+    // localStorage.setItem(this.model.id.toString(), JSON.stringify(this.model)); 
   }
 }
