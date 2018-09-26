@@ -25,9 +25,9 @@ export class ProductsTableComponent implements OnInit {
           { field: 'name', header: 'Produto' },
           { field: 'quantity', header: 'Quantidade' },
           { field: 'price', header: 'Preço' },
-          { field: 'perishable', header: 'Perecível' },
-          { field: 'manifacture', header: 'Data de Fabricação' },
-          { field: 'expiration', header: 'Data de Validade' }
+          { field: 'isPerishable', header: 'Perecível' },
+          { field: 'manifactureDate', header: 'Data de Fabricação' },
+          { field: 'expirationDate', header: 'Data de Validade' }
       ];
   }
 }

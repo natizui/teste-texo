@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -15,7 +16,7 @@ export class ProductFormComponent implements OnInit{
 
   units = ['L', 'Kg', 'unidade'];
   
-  model = new Product();
+  model = new Product( null, null, null, null, null, null, new Date(), new Date());
 
   product$: Observable<Product>;
 
@@ -36,13 +37,14 @@ export class ProductFormComponent implements OnInit{
         this.service.getProduct(params.get('id')))
       );
       //update model with product data if necessary
-      this.product$.subscribe(prod => this.model = prod);
+      this.product$.subscribe(prod => 
+        this.model = prod);
     }
   }
   
   onSubmit() { 
-    const key = (localStorage.length + 1).toString();
+    this.model.id = localStorage.length + 1;
+    const key = this.model.id.toString();
     this.service.saveProduct(key, this.model);
-    // localStorage.setItem(this.model.id.toString(), JSON.stringify(this.model)); 
   }
 }
