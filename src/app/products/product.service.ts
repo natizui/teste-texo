@@ -26,7 +26,7 @@ export class ProductService {
     return subject.asObservable(); 
   }
 
-  //save new product or update existent
+  //saves new product or update existent
   saveProduct(key, product){
     localStorage.setItem(key, JSON.stringify(product));
   }
