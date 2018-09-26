@@ -7,6 +7,7 @@ export class ProductService {
 
   constructor() { }
 
+  //returns everything stored on local storage as an array of JS objects
   getProducts() {
     const products = [];
     for (let i = 0; i < localStorage.length; ++i) {

@@ -6,7 +6,7 @@ export class Product {
   public quantity: number,
   public unit: string,
   public price: number,
-  public perishable: boolean,
+  public isPerishable: boolean,
   public expirationDate: Date,
   public manifactureDate: Date,
   ){}

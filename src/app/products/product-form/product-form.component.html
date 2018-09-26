@@ -25,21 +25,22 @@
       </div>
  
       <div class="form-group">
-        <input type="checkbox" ng-model="product.perishable" value="true" required [(ngModel)]="model.perishable" name="perishable">Perecível<br>
+        <input type="checkbox" ng-model="product.isPerishable" value="true" required [(ngModel)]="model.isPerishable" name="perishable">Perecível<br>
       </div>
  
       <div class="form-group">
         <label for="expiration">Data de validade</label>
-        <input type="date" class="form-control" id="expiration" ng-required="product.perishable" [(ngModel)]="model.expiration" name="expiration">
+        <input type="date" class="form-control" id="expiration" ng-required="product.isPerishable" [(ngModel)]="model.expirationDate" name="expiration">
       </div>
  
       <div class="form-group">
         <label for="manifacture">Data de fabricação</label>
-        <input type="date" class="form-control" id="manifacture" required [(ngModel)]="model.manifacture" name="manifacture">
+        <input type="date" class="form-control" id="manifacture" required [(ngModel)]="model.manifactureDate" name="manifacture">
       </div>
  
-      <button type="submit" class="btn btn-success">Salvar</button>
-      <a routerLink="" class="btn btn-success">Cancelar</a>
- 
+      <button pButton type="submit" label="Salvar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+      <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+
     </form>
 </div>
+
