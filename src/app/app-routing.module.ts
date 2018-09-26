@@ -4,12 +4,24 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductFormComponent } from './products/product-form/product-form.component';
 
 const routes: Routes = [
-  { path: '', component: ProductListComponent },
-  { path: 'cadastro', component: ProductFormComponent}
+  { 
+    path: '', 
+    component: ProductListComponent 
+  },
+  { 
+    path: 'cadastro', 
+    component: ProductFormComponent,
+  },
+  { 
+    path: 'produto/:id', 
+    component: ProductFormComponent
+  }
 ];
 
 @NgModule({
-  imports: [ RouterModule.forRoot(routes) ],
+  imports: [ 
+    RouterModule.forRoot(routes),
+  ],
   exports: [ RouterModule ]
 })
 export class AppRoutingModule {}

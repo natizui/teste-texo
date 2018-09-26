@@ -11,7 +11,7 @@
       <td *ngFor="let col of columns">
         {{ product[col.field] }}
       </td>
-      <button pButton routerLink="/cadastro/{{id}}" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
+      <button pButton [routerLink]="['/produto', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
       <button pButton icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
     </tr>
   </ng-template>

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,13 @@ export class ProductService {
         products.push(value);
     }
     return products;
+  }
+
+  //returns the product with that id
+  getProduct(id){
+    const subject = new BehaviorSubject<any>([]);
+    subject.next(JSON.parse(localStorage.getItem(id)));
+    return subject.asObservable(); 
   }
 
 }
