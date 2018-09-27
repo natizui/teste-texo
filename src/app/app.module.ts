@@ -10,6 +10,10 @@ import {MenuModule} from 'primeng/menu';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {InputTextModule} from 'primeng/inputtext';
+import {CheckboxModule} from 'primeng/checkbox';
+import {PanelModule} from 'primeng/panel';
+import {DropdownModule} from 'primeng/dropdown';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -44,7 +48,11 @@ import { ProductService } from './products/product.service';
     BrowserAnimationsModule,
     ConfirmDialogModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    InputTextModule,
+    CheckboxModule,
+    PanelModule,
+    DropdownModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

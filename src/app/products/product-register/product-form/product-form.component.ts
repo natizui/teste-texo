@@ -3,6 +3,9 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+interface Unit {
+  name: string,
+}
 
 import { Product, ProductService } from '../../product.service';
 
@@ -13,7 +16,9 @@ import { Product, ProductService } from '../../product.service';
 })
 export class ProductFormComponent implements OnInit{
 
-  units = ['L', 'Kg', 'unidade'];
+  units: Unit[];
+
+  selectedUnit: Unit;
   
   model = new Product();
 
@@ -22,8 +27,14 @@ export class ProductFormComponent implements OnInit{
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private service: ProductService
-  ) {}
+    private service: ProductService,
+  ) {
+    this.units = [
+      {name: 'L'},
+      {name: 'Kg'},
+      {name: 'Unidade'}
+    ]
+  }
   
   ngOnInit(){
     this.loadProductForEdit();
