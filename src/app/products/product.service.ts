@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class Product {
   
-  public id: number;
+  public id: string;
   public name: string;
   public quantity: number;
   public unit: string;

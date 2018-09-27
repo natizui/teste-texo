@@ -38,8 +38,12 @@ export class ProductFormComponent implements OnInit{
   }
 
   onSubmit() { 
-    this.model.id = localStorage.length + 1;
-    const idAsString = this.model.id.toString();
-    this.service.saveProduct(idAsString, this.model);
+    this.model.id = this.generateId();
+    this.service.saveProduct(this.model.id, this.model);
+    console.log(this.model);
+  }
+
+  private generateId() {
+    return (Date.now().toString(36) + Math.random().toString(36).substr(2)).toUpperCase();
   }
 }
