@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Product, ProductService } from '../../product.service';
+import { ConfirmationService } from 'primeng/components/common/confirmationservice';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 
 @Component({
   selector: 'app-products-table',
   templateUrl: './products-table.component.html',
-  styleUrls: ['./products-table.component.css']
+  styleUrls: ['./products-table.component.css'],
+  providers: [ConfirmationService]
 })
 export class ProductsTableComponent implements OnInit {
 
@@ -13,12 +16,16 @@ export class ProductsTableComponent implements OnInit {
 
   cols: any[];
 
-  constructor(private productService: ProductService) { }
+  msgs: any[] = [];
+
+  constructor(
+    private productService: ProductService, 
+    private confirmationService: ConfirmationService
+  ) { }
 
   ngOnInit() {
-      this.products = this.productService.getProducts();
+      this.updatePage();
       console.log(this.products);
-      // products => this.products = products;
 
       this.cols = [
           { field: 'name', header: 'Produto' },
@@ -31,8 +38,20 @@ export class ProductsTableComponent implements OnInit {
       ];
   }
 
-  confirmDelete(id){
-    console.log(id);
-    //pop-up depois chama deleteProduct()
+  private updatePage() {
+    this.products = this.productService.getProducts();
+  }
+
+  confirm(product: Product){
+    this.confirmationService.confirm({
+      message: `Excluir ${product.name}?`,
+      header: 'Confirmação',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+        this.productService.deleteProduct(product.id);
+        this.updatePage();
+        this.msgs = [{severity:'info', detail:'Produto excluído'}];
+      }
+    });
   }
 }

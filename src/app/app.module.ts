@@ -7,6 +7,9 @@ import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
 import {MenuModule} from 'primeng/menu';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -38,7 +41,10 @@ import { ProductService } from './products/product.service';
     ButtonModule,
     CalendarModule,
     MenuModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ConfirmDialogModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
