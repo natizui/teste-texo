@@ -27,10 +27,14 @@ export class ProductService {
   }
 
   //saves new product or update existent
-  saveProduct(key, product){
-    localStorage.setItem(key, JSON.stringify(product));
+  saveProduct(id, product){
+    localStorage.setItem(id, JSON.stringify(product));
   }
 
+  //deletes the product with that id
+  deleteProduct(id){
+    localStorage.removeItem(id);
+  }
 }
 
 
