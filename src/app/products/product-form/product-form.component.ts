@@ -16,7 +16,7 @@ export class ProductFormComponent implements OnInit{
 
   units = ['L', 'Kg', 'unidade'];
   
-  model = new Product( null, null, null, null, null, null, new Date(), new Date());
+  model = new Product();
 
   product$: Observable<Product>;
 
@@ -40,7 +40,7 @@ export class ProductFormComponent implements OnInit{
 
   onSubmit() { 
     this.model.id = localStorage.length + 1;
-    const key = this.model.id.toString();
-    this.service.saveProduct(key, this.model);
+    const idAsString = this.model.id.toString();
+    this.service.saveProduct(idAsString, this.model);
   }
 }
