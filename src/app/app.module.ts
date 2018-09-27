@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {CalendarModule} from 'primeng/calendar';
+import {MenuModule} from 'primeng/menu';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -13,6 +15,10 @@ import { ProductFormComponent } from './products/product-register/product-form/p
 import { ProductsTableComponent } from './products/product-list/products-table/products-table.component';
 import { BreadCrumbComponent } from './shared/bread-crumb/bread-crumb.component';
 import { ProductRegisterComponent } from './products/product-register/product-register.component';
+import { MenuComponent } from './shared/menu/menu.component';
+import { ProductService } from './products/product.service';
+
+
 
 @NgModule({
   declarations: [
@@ -21,7 +27,8 @@ import { ProductRegisterComponent } from './products/product-register/product-re
     ProductFormComponent,
     ProductsTableComponent,
     BreadCrumbComponent,
-    ProductRegisterComponent
+    ProductRegisterComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -29,9 +36,11 @@ import { ProductRegisterComponent } from './products/product-register/product-re
     FormsModule,
     TableModule,
     ButtonModule,
-    CalendarModule
+    CalendarModule,
+    MenuModule,
+    BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
