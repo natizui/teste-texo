@@ -1,13 +1,13 @@
 export class Product {
+  
+  public id: number;
+  public name: string;
+  public quantity: number;
+  public unit: string;
+  public price: number;
+  public isPerishable: boolean;
+  public expirationDate: Date;
+  public manifactureDate: Date;
 
-  constructor (
-  public id: number,
-  public name: string,
-  public quantity: number,
-  public unit: string,
-  public price: number,
-  public isPerishable: boolean,
-  public expirationDate: Date,
-  public manifactureDate: Date,
-  ){}
+  constructor (){}
 }
