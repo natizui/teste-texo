@@ -1,0 +1,7 @@
+  <ul class="breadcrumb">
+    <li *ngFor="let crumb of settings.breadcrumb" [class.active]="crumb.active">
+      <a *ngIf="!crumb.active" [routerLink]="[crumb.href]">{{ crumb.label }}</a> 
+      <span *ngIf="crumb.active">{{ crumb.label }}</span></li>
+  </ul>
+
+
