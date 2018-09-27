@@ -1,9 +1,25 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
+export class Product {
+  
+  public id: number;
+  public name: string;
+  public quantity: number;
+  public unit: string;
+  public price: number;
+  public isPerishable: boolean;
+  public expirationDate: Date;
+  public manifactureDate: Date;
+  
+  constructor (){}
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 
   constructor() { }

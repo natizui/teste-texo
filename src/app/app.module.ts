@@ -9,7 +9,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ProductFormComponent } from './products/product-form/product-form.component';
+import { ProductFormComponent } from './products/product-register/product-form/product-form.component';
 import { ProductsTableComponent } from './products/product-list/products-table/products-table.component';
 import { BreadCrumbComponent } from './shared/bread-crumb/bread-crumb.component';
 import { ProductRegisterComponent } from './products/product-register/product-register.component';

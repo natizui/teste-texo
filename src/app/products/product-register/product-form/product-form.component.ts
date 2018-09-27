@@ -4,8 +4,7 @@ import { switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 
-import { Product } from '../product';
-import { ProductService } from '../product.service';
+import { Product, ProductService } from '../../product.service';
 
 @Component({
   selector: 'app-product-form',
