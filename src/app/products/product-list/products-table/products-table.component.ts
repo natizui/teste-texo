@@ -24,10 +24,16 @@ export class ProductsTableComponent implements OnInit {
       this.cols = [
           { field: 'name', header: 'Produto' },
           { field: 'quantity', header: 'Quantidade' },
+          { field: 'unit', header: 'Unidade' },
           { field: 'price', header: 'Preço' },
-          { field: 'isPerishable', header: 'Perecível' },
-          { field: 'manifactureDate', header: 'Data de Fabricação' },
-          { field: 'expirationDate', header: 'Data de Validade' }
+          { field: 'isPerishable', header: 'Perecível', isBoolean: true },
+          { field: 'manifactureDate', header: 'Data de Fabricação', isDate: true },
+          { field: 'expirationDate', header: 'Data de Validade', isDate: true }
       ];
+  }
+
+  confirmDelete(id){
+    console.log(id);
+    //pop-up depois chama deleteProduct()
   }
 }

@@ -9,10 +9,14 @@
   <ng-template pTemplate="body" let-product let-columns="columns">
     <tr>
       <td *ngFor="let col of columns">
-        {{ product[col.field] }}
+        <p *ngIf="col.isBoolean">SIM</p>
+        <p *ngIf="col.isDate">{{ product[col.field] | date:'dd/MM/yy' }}</p>
+        <p *ngIf="!col.isBoolean && !col.isDate">{{ product[col.field] }}</p>
       </td>
+      <!-- edit button -->
       <button pButton [routerLink]="['/produto', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
-      <button pButton icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+      <!-- delete button -->
+      <button pButton (click)="confirmDelete(product.id)" icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
     </tr>
   </ng-template>
 </p-table>
