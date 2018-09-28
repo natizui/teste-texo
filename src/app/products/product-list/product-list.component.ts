@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
 
   settingsBreadCrumb = {
     breadcrumb: [
-      {label: 'Produtos', href: '/', active: true}
+      {label: 'Produtos', href: '/produtos', active: true}
     ]
   }
 

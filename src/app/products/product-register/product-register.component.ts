@@ -18,8 +18,8 @@ export class ProductRegisterComponent implements OnInit {
   
   settingsBreadCrumb = {
     breadcrumb: [
-      {label: 'Produtos', href: '/', active: false},
-      {label: 'Cadastro', href: '/cadastro', active: true}
+      {label: 'Produtos', href: '/produtos', active: false},
+      {label: 'Cadastro', href: '/produtos/cadastro', active: true}
     ]
   }
   

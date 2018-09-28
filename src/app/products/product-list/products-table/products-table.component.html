@@ -15,7 +15,7 @@
         <p *ngIf="!col.isBoolean && !col.isDate">{{ product[col.field] }}</p>
       </td>
       <!-- edit button -->
-      <button pButton [routerLink]="['/produto', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
+      <button pButton [routerLink]="['/produtos', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
       <!-- delete button -->
       <button pButton (click)="confirm(product)" icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
     </tr>

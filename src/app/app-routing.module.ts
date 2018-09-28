@@ -6,15 +6,20 @@ import { ProductRegisterComponent } from './products/product-register/product-re
 
 const routes: Routes = [
   { 
-    path: '', 
+    path: 'produtos', 
     component: ProductListComponent 
   },
   { 
-    path: 'cadastro', 
+    path: '', 
+    redirectTo: '/produtos' ,
+    pathMatch: 'full'
+  },
+  { 
+    path: 'produtos/cadastro', 
     component: ProductRegisterComponent,
   },
   { 
-    path: 'produto/:id', 
+    path: 'produtos/:id', 
     component: ProductRegisterComponent
   }
 ];

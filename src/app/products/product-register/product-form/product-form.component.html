@@ -18,7 +18,7 @@
 
         <div class="ui-lg-12 ui-md-12 ui-sm-12">
           <h3>Unidade de medida</h3>
-          <p-dropdown id="unit" [options]="units" required [(ngModel)]="model.unit" optionLabel="name" placeholder="Selecione uma opção"></p-dropdown>
+          <p-dropdown id="unit" [options]="units" required [(ngModel)]="selectedUnit" optionLabel="name" placeholder="Selecione uma opção"></p-dropdown>
         </div>
   
         <div class="ui-lg-12 ui-md-12 ui-sm-12">
@@ -36,7 +36,7 @@
           <p-calendar id="manifacture" type="date" required [(ngModel)]="model.manifactureDate" name="manifacture" dateFormat="dd/mm/yy"></p-calendar>
         </div>
   
-        <button pButton type="submit" label="Salvar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+        <button pButton type="submit" label="Salvar" (click)="onSubmit()" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
         <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
 
       </div>

@@ -18,7 +18,17 @@ export class ProductFormComponent implements OnInit{
 
   units: Unit[];
 
-  selectedUnit: Unit;
+  public get selectedUnit(): Unit {
+    if(this.model.unit && this.units){
+      return this.units.find(
+        e => e.name === this.model.unit        
+      )
+    }
+    return undefined;
+  }
+  public set selectedUnit(value: Unit) {
+    this.model.unit = value.name;
+  }
   
   model = new Product();
 
@@ -41,15 +51,18 @@ export class ProductFormComponent implements OnInit{
   }
   
   private loadProductForEdit() {
-    const isEditing = this.router.isActive('/produto', false);
-    if (isEditing) {
+    const isRegistering = this.router.isActive('/produtos/cadastro', false);
+    if (!isRegistering) {
       this.product$ = this.route.paramMap.pipe(switchMap((params: ParamMap) => this.service.getProduct(params.get('id'))));
       this.product$.subscribe(prod => this.model = prod);
     }
+    console.log(this.model);
   }
 
   onSubmit() { 
-    this.model.id = this.generateId();
+    if(!this.model.id){
+      this.model.id = this.generateId();
+    }
     this.service.saveProduct(this.model.id, this.model);
     console.log(this.model);
   }
