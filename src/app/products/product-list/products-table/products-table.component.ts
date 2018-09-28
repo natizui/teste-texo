@@ -69,9 +69,13 @@ export class ProductsTableComponent implements OnInit, AfterViewInit {
       header: 'Confirmação',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.productService.deleteProduct(product.id);
-        this.updatePage();
-        this.msgs = [{severity:'info', detail:'Produto excluído'}];
+        try {
+          this.productService.deleteProduct(product.id);
+          this.updatePage();
+          this.msgs = [{severity:'info', detail:'Produto excluído'}];
+        } catch (error) {
+          this.msgs = [{severity:'error', detail:'Erro ao excluir'}];
+        }
       }
     });
   }
