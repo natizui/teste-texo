@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
-
-// interface Unit {
-//   name: string,
-// }
+import * as Observable from 'rxjs/internal/Observable/fromEvent';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { Product, ProductService } from '../../product.service';
 
@@ -14,49 +12,25 @@ import { Product, ProductService } from '../../product.service';
   styleUrls: ['./product-form.component.css'],
   providers: [MessageService]
 })
-export class ProductFormComponent implements OnInit{
+export class ProductFormComponent implements OnInit, AfterViewInit{
 
-  @Input() model: Product; 
-
-  // units: Unit[];
-  units: SelectItem[];
-  userform: FormGroup;
-
-  // public get selectedUnit(): Unit {
-  //   if(this.model.unit && this.units){
-  //     return this.units.find(
-  //       e => e.name === this.model.unit        
-  //     )
-  //   }
-  //   return undefined;
-  // }
-  // public set selectedUnit(value: Unit) {
-  //   this.model.unit = value.name;
-  // }
+  @Input() model: Product;
   
-  constructor(
+  @ViewChild('expiration') expiration: ElementRef;
+
+  units: SelectItem[];
+  productForm: FormGroup;
+  teste: EventEmitter<any>;
+
+   constructor(
     private service: ProductService,
     private fb: FormBuilder, 
     private messageService: MessageService
-  ) {
-    // this.units = [
-    //   {name: 'L'},
-    //   {name: 'Kg'},
-    //   {name: 'Unidade'}
-    // ]
-  }
+  ) {}
   
   ngOnInit(){
     
-    this.userform = this.fb.group({
-      'name': new FormControl(this.model.name, Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')])),
-      'isPerishable': new FormControl(this.model.isPerishable),
-      'quantity': new FormControl(this.model.quantity),
-      'unit': new FormControl(this.model.unit, Validators.required),
-      'price': new FormControl(this.model.price, Validators.required),
-      'expirationDate': new FormControl(''),
-      'manifactureDate': new FormControl('', Validators.required)
-  });
+    this.setForm();
 
     this.units = [];
         this.units.push({label:'Selecione uma opção', value:''});
@@ -65,16 +39,49 @@ export class ProductFormComponent implements OnInit{
         this.units.push({label:'Unidade', value:'Unidade'});
   }
   
-  
+  private setForm() {
+    this.productForm = this.fb.group({
+      'name': new FormControl(this.model.name, Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')])),
+      'isPerishable': new FormControl(this.model.isPerishable),
+      'quantity': new FormControl(this.model.quantity),
+      'unit': new FormControl(this.model.unit, Validators.required),
+      'price': new FormControl(this.model.price, Validators.required),
+      'expirationDate': new FormControl(''),
+      'manifactureDate': new FormControl('', Validators.required)
+    });
+  }
+
+  ngAfterViewInit() {
+    Observable.fromEvent(this.expiration.nativeElement, 'oninput')
+              .pipe(debounceTime(100), distinctUntilChanged())
+    //           .subscribe(() => {
+    //             this.checkIfExpired(this.expiration.nativeElement.value);
+    //           });
+
+    // this.teste.subscribe(() => console.log("agora vai!"))
+  }
+  checkIfExpired(value: any): any {
+    console.log(value)
+  }
 
   onSubmit(value: Product) { 
-    console.log(value);
+    value.id = this.model.id;
     this.model = value;
+    let isNew = false;
     if(!this.model.id){
       this.model.id = this.generateId();
+      isNew = true;
     }
     this.service.saveProduct(this.model.id, this.model);
     this.messageService.add({severity:'info', summary:'Success', detail:'Form Submitted'});
+    if(isNew){
+      this.resetForm();
+    }
+  }
+
+  private resetForm() {
+    this.model = new Product();
+    this.setForm();
   }
 
   private generateId() {
@@ -82,5 +89,5 @@ export class ProductFormComponent implements OnInit{
   }
 
 
-  get diagnostic() { return JSON.stringify(this.userform.value); }
+  get diagnostic() { return JSON.stringify(this.productForm.value); }
 }
