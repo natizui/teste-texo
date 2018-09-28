@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Product, ProductService } from '../../product.service';
 import { ConfirmationService } from 'primeng/components/common/confirmationservice';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import * as Observable from 'rxjs/internal/Observable/fromEvent';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
@@ -10,12 +11,13 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./products-table.component.css'],
   providers: [ConfirmationService]
 })
-export class ProductsTableComponent implements OnInit {
+export class ProductsTableComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('search') search: ElementRef;
 
   products: Product[];
-
+  tableProducts: Product[];
   cols: any[];
-
   msgs: any[] = [];
 
   constructor(
@@ -38,8 +40,27 @@ export class ProductsTableComponent implements OnInit {
       ];
   }
 
+  ngAfterViewInit() {
+    Observable.fromEvent(this.search.nativeElement, 'keyup')
+              .pipe(debounceTime(100), distinctUntilChanged())
+              .subscribe(() => {
+                this.searchTableProduct(this.search.nativeElement.value);
+              })
+  }
+  searchTableProduct(value: string) {
+    if(value !== ''){
+      this.tableProducts = this.products.filter(p => {
+        const searchParams = (p.name + p.unit).toLowerCase();
+        return searchParams.indexOf(value.toLowerCase()) >= 0;
+      })
+    } else {
+      this.tableProducts = this.products;
+    }
+  }
+
   private updatePage() {
     this.products = this.productService.getProducts();
+    this.tableProducts = this.products;
   }
 
   confirm(product: Product){
