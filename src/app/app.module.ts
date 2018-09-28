@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
 
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -54,7 +55,8 @@ import { ProductService } from './products/product.service';
     CheckboxModule,
     PanelModule,
     DropdownModule,
-    BreadcrumbModule
+    BreadcrumbModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

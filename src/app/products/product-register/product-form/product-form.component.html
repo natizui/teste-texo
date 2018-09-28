@@ -1,47 +1,114 @@
-<div class="ui-g">
-  <div class="ui-lg-12 ui-md-12 ui-sm-12 center-login">
-    <p-panel header="Cadastro do Produto">
-      <div class="ui-g">
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Nome do produto</h3>
-          <input id="name" type="text" pInputText size="30" required [(ngModel)]="model.name">
-        </div>
-        
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <p-checkbox type="checkbox" ng-model="product.isPerishable" required [(ngModel)]="model.isPerishable" label="Produto perecível?" binary="true"></p-checkbox>
-        </div>
-  
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Quantidade</h3>
-          <input id="quantity" type="number" pInputText size="30"  [(ngModel)]="model.quantity">
-        </div>
-
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Unidade de medida</h3>
-          <p-dropdown id="unit" [options]="units" required [(ngModel)]="selectedUnit" optionLabel="name" placeholder="Selecione uma opção"></p-dropdown>
-        </div>
-  
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Preço</h3>
-          <input id="price" type="number" pInputText size="30" required [(ngModel)]="model.price">
-        </div>
-  
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Data de validade</h3>
-          <p-calendar id="expiration" type="date" ng-required="product.isPerishable" [(ngModel)]="model.expirationDate" dateFormat="dd/mm/yy"></p-calendar>
-        </div>
-  
-        <div class="ui-lg-12 ui-md-12 ui-sm-12">
-          <h3>Data de fabricação</h3>
-          <p-calendar id="manifacture" type="date" required [(ngModel)]="model.manifactureDate" name="manifacture" dateFormat="dd/mm/yy"></p-calendar>
-        </div>
-  
-        <button pButton type="submit" label="Salvar" (click)="onSubmit()" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
-        <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
-
+<form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+  <p-panel header="Cadastro do Produto">
+    <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+        Form Submitted
+        <br>
+        {{diagnostic}}
+    </div>
+    <div>
+      <p>*campos obrigatórios</p>
+    </div>
+    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+      
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Nome do Produto *:
+          </div>
+          <div class="ui-grid-col-6">
+              <input id="name" type="text" pInputText formControlName="name" placeholder="Obrigatório" maxlength="50">
+          </div>
+          <div class="ui-grid-col-4">
+              <p-message severity="error" 
+                        [text]="
+                          userform.controls['name'].errors['required'] ? 'Nome do produto é obrigatório' : 
+                          userform.controls['name'].errors['maxlength'] ? 'Não deve ter mais que 50 caracteres' : 
+                          userform.pattern['name'].errors['pattern'] ? 'Nome do produto de ter apenas letras' : 
+                          ''"  
+                        *ngIf="!userform.controls['name'].valid&&userform.controls['name'].dirty"></p-message>
+          </div>
       </div>
-    </p-panel>
-  </div>
-</div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3"></div>
+          <div class="ui-grid-col-6">
+            <p-checkbox type="checkbox" ng-model="product.isPerishable" label="Produto perecível? *" binary="true" formControlName="isPerishable"></p-checkbox>
+          </div>
+          <div class="ui-grid-col-4"></div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Quantidade :
+          </div>
+          <div class="ui-grid-col-6">
+              <input id="quantity" type="number" pInputText size="30" formControlName="quantity">
+          </div>
+          <div class="ui-grid-col-4">
+              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message> -->
+          </div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Unidade de medida *:
+          </div>
+          <div class="ui-grid-col-6">
+            <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false"></p-dropdown>
+          </div>
+          <div class="ui-grid-col-4">
+              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message> -->
+          </div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Preço *:
+          </div>
+          <div class="ui-grid-col-6">
+              <input id="price" type="number" pInputText formControlName="price" placeholder="Obrigatório">
+          </div>
+          <div class="ui-grid-col-4">
+              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message> -->
+          </div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Data de Validade *:
+          </div>
+          <div class="ui-grid-col-6">
+              <p-calendar id="expiration" type="date" ng-Obrigatório="product.isPerishable" formControlName="expirationDate" dateFormat="dd/mm/yy" placeholder="Obrigatório se perecível"></p-calendar>
+          </div>
+          <div class="ui-grid-col-4">
+              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message> -->
+          </div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3">
+              Data de Fabricação *:
+          </div>
+          <div class="ui-grid-col-6">
+            <p-calendar id="manifacture" type="date" name="manifacture" dateFormat="dd/mm/yy" formControlName="manifactureDate" placeholder="Obrigatório"></p-calendar>
+          </div>
+          <div class="ui-grid-col-4">
+              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!userform.controls['firstname'].valid&&userform.controls['firstname'].dirty"></p-message> -->
+          </div>
+      </div>
+
+      <div class="ui-grid-row">
+          <div class="ui-grid-col-3"></div>
+          <div class="ui-grid-col-3">
+            <button pButton type="submit" label="Salvar" [disabled]="!userform.valid" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+          </div>
+          <div class="ui-grid-col-3">
+            <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+          </div>
+          <div class="ui-grid-col-4"></div>
+      </div>
+
+    </div>
+  </p-panel>
+</form>
 
 
