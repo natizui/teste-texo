@@ -14,9 +14,10 @@
   <ng-template pTemplate="body" let-product let-columns="columns">
     <tr>
       <td *ngFor="let col of columns">
+        <p *ngIf="col.isCurrency">{{ product[col.field] | currency:'BRL':'symbol':'1.2-2':'pt' }}</p>
         <p *ngIf="col.isBoolean">SIM</p>
         <p *ngIf="col.isDate">{{ product[col.field] | date:'dd/MM/yy' }}</p>
-        <p *ngIf="!col.isBoolean && !col.isDate">{{ product[col.field] }}</p>
+        <p *ngIf="col.isGeneral">{{ product[col.field] }}</p>
       </td>
       <!-- edit button -->
       <button pButton [routerLink]="['/produtos', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>

@@ -30,10 +30,10 @@ export class ProductsTableComponent implements OnInit, AfterViewInit {
       console.log(this.products);
 
       this.cols = [
-          { field: 'name', header: 'Produto' },
-          { field: 'quantity', header: 'Quantidade' },
-          { field: 'unit', header: 'Unidade' },
-          { field: 'price', header: 'Preço' },
+          { field: 'name', header: 'Produto', isGeneral:true },
+          { field: 'quantity', header: 'Quantidade', isGeneral:true },
+          { field: 'unit', header: 'Unidade', isGeneral:true },
+          { field: 'price', header: 'Preço', isCurrency: true },
           { field: 'isPerishable', header: 'Perecível', isBoolean: true },
           { field: 'manifactureDate', header: 'Data de Fabricação', isDate: true },
           { field: 'expirationDate', header: 'Data de Validade', isDate: true }

@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-
+import localeBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
 
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
@@ -17,6 +18,8 @@ import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 
+import { CurrencyMaskModule } from "ng2-currency-mask";
+
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +30,7 @@ import { ProductRegisterComponent } from './products/product-register/product-re
 import { MenuComponent } from './shared/menu/menu.component';
 import { ProductService } from './products/product.service';
 
-
+registerLocaleData(localeBr, 'pt');
 
 @NgModule({
   declarations: [
@@ -56,9 +59,12 @@ import { ProductService } from './products/product.service';
     PanelModule,
     DropdownModule,
     BreadcrumbModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CurrencyMaskModule 
   ],
-  providers: [ProductService],
+  providers: [
+    ProductService,
+    { provide: LOCALE_ID, useValue: 'pt' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
