@@ -15,7 +15,7 @@
     <tr>
       <td *ngFor="let col of columns">
         <p *ngIf="col.isCurrency">{{ product[col.field] | currency:'BRL':'symbol':'1.2-2':'pt' }}</p>
-        <p *ngIf="col.isBoolean">SIM</p>
+        <p *ngIf="col.isBoolean">{{ product[col.field] | boolean }}</p>
         <p *ngIf="col.isDate">{{ product[col.field] | date:'dd/MM/yy' }}</p>
         <p *ngIf="col.isGeneral">{{ product[col.field] }}</p>
       </td>

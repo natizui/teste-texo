@@ -29,6 +29,7 @@ import { BreadCrumbComponent } from './shared/bread-crumb/bread-crumb.component'
 import { ProductRegisterComponent } from './products/product-register/product-register.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { ProductService } from './products/product.service';
+import { BooleanPipe } from './shared/pipes/boolean/boolean.pipe';
 
 registerLocaleData(localeBr, 'pt');
 
@@ -40,7 +41,8 @@ registerLocaleData(localeBr, 'pt');
     ProductsTableComponent,
     BreadCrumbComponent,
     ProductRegisterComponent,
-    MenuComponent
+    MenuComponent,
+    BooleanPipe
   ],
   imports: [
     BrowserModule,
