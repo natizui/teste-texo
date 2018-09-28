@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MenuItem } from 'primeng/components/common/menuitem';
 
 @Component({
   selector: 'app-product-list',
@@ -7,16 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductListComponent implements OnInit {
 
+  items: MenuItem[];
+  home: MenuItem;
+
   constructor() { }
 
   ngOnInit() {
+    this.items = [
+      {label:'Produtos'}
+    ]
     
+    this.home = {icon: 'pi pi-home'};
   }
 
-  settingsBreadCrumb = {
-    breadcrumb: [
-      {label: 'Produtos', href: '/produtos', active: true}
-    ]
-  }
+  // settingsBreadCrumb = {
+  //   breadcrumb: [
+  //     {label: 'Produtos', href: '/produtos', active: true}
+  //   ]
+  // }
 
 }

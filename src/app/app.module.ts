@@ -14,6 +14,7 @@ import {InputTextModule} from 'primeng/inputtext';
 import {CheckboxModule} from 'primeng/checkbox';
 import {PanelModule} from 'primeng/panel';
 import {DropdownModule} from 'primeng/dropdown';
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
@@ -52,7 +53,8 @@ import { ProductService } from './products/product.service';
     InputTextModule,
     CheckboxModule,
     PanelModule,
-    DropdownModule
+    DropdownModule,
+    BreadcrumbModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]

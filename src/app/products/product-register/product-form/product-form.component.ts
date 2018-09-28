@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Component, OnInit, Input } from '@angular/core';
 
 interface Unit {
   name: string,
@@ -15,6 +12,8 @@ import { Product, ProductService } from '../../product.service';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit{
+
+  @Input() model: Product; 
 
   units: Unit[];
 
@@ -30,13 +29,7 @@ export class ProductFormComponent implements OnInit{
     this.model.unit = value.name;
   }
   
-  model = new Product();
-
-  product$: Observable<Product>;
-
   constructor(
-    private route: ActivatedRoute,
-    private router: Router,
     private service: ProductService,
   ) {
     this.units = [
@@ -47,17 +40,9 @@ export class ProductFormComponent implements OnInit{
   }
   
   ngOnInit(){
-    this.loadProductForEdit();
   }
   
-  private loadProductForEdit() {
-    const isRegistering = this.router.isActive('/produtos/cadastro', false);
-    if (!isRegistering) {
-      this.product$ = this.route.paramMap.pipe(switchMap((params: ParamMap) => this.service.getProduct(params.get('id'))));
-      this.product$.subscribe(prod => this.model = prod);
-    }
-    console.log(this.model);
-  }
+  
 
   onSubmit() { 
     if(!this.model.id){
