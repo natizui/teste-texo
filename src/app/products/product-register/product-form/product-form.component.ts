@@ -34,11 +34,11 @@ export class ProductFormComponent implements OnInit{
 
     this.units = [];
       this.units.push({label:'Selecione uma opção', value: null});
-      this.units.push({label:'Litro', value:'Litro'});
-      this.units.push({label:'Quilograma', value:'Quilograma'});
-      this.units.push({label:'Unidade', value:'Unidade'});
+      this.units.push({label:'Litro', value:'Lt'});
+      this.units.push({label:'Quilograma', value:'Kg'});
+      this.units.push({label:'Unidade', value:'Un'});
 
-    this.selectedUnit = this.units[0];
+    this.selectedUnit = this.model.unit;
 
   }
 
