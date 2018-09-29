@@ -24,14 +24,14 @@
                           productForm.controls['name'].errors['maxlength'] ? 'Não deve ter mais que 50 caracteres' : 
                           productForm.controls['name'].errors['pattern'] ? 'Nome do produto deve ter apenas letras' : 
                           ''"  
-                        *ngIf="!productForm.controls['name'].valid&&productForm.controls['name'].dirty"></p-message>
+                        *ngIf="!productForm.controls['name'].valid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"></p-message>
           </div>
       </div>
 
       <div class="ui-grid-row">
           <div class="ui-grid-col-3"></div>
           <div class="ui-grid-col-6">
-            <p-checkbox type="checkbox" ng-model="product.isPerishable" label="Produto perecível? *" binary="true" formControlName="isPerishable"></p-checkbox>
+            <p-checkbox type="checkbox" ng-model="product.isPerishable" label="Produto perecível?" binary="true" formControlName="isPerishable"></p-checkbox>
           </div>
           <div class="ui-grid-col-4"></div>
       </div>
@@ -44,7 +44,7 @@
                   <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false" [(ngModel)]="selectedUnit"></p-dropdown>
                 </div>
                 <div class="ui-grid-col-4">
-                    <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
+                    <p-message severity="error" text="Unidade é obrigatório" *ngIf="!productForm.controls['unit'].valid && (productForm.controls['unit'].dirty || productForm.controls['unit'].touched)"></p-message>
                 </div>
             </div>
 
@@ -68,7 +68,6 @@
               <input id="quantity" type="number" pInputText formControlName="quantity" *ngSwitchDefault disabled>
           </div>
           <div class="ui-grid-col-4">
-              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
           </div>
       </div>
 
@@ -83,7 +82,7 @@
               </div>
           </div>
           <div class="ui-grid-col-4">
-              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
+              <p-message severity="error" text="Preço é obrigatório" *ngIf="!productForm.controls['price'].valid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)"></p-message>
           </div>
       </div>
 
@@ -92,10 +91,15 @@
               Data de Fabricação *:
           </div>
           <div class="ui-grid-col-6">
-            <p-calendar id="manifacture" type="date" name="manifacture" dateFormat="dd/mm/yy" formControlName="manifactureDate" placeholder="Obrigatório"></p-calendar>
+            <p-calendar id="manufacture" type="date" name="manufacture" dateFormat="dd/mm/yy" formControlName="manufactureDate" placeholder="Obrigatório"></p-calendar>
           </div>
           <div class="ui-grid-col-4">
-              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
+              <p-message severity="error" 
+              [text]="
+                productForm.controls['manufactureDate'].errors?.required ? 'Data de fabricação é obrigatória' : 
+                productForm.errors?.manufactureDateInvalid ? 'Data de fabricação não pode ser maior que a de validade' : 
+                ''"    
+              *ngIf="(!productForm.controls['manufactureDate'].valid || productForm.errors?.manufactureDateInvalid) && (productForm.controls['manufactureDate'].dirty || productForm.controls['manufactureDate'].touched)"></p-message>
           </div>
       </div>
 
@@ -107,7 +111,9 @@
               <p-calendar id="expiration" type="date" ng-required="product.isPerishable" formControlName="expirationDate" dateFormat="dd/mm/yy" placeholder="Obrigatório se perecível" #expiration (onFocus)="teste"></p-calendar>
           </div>
           <div class="ui-grid-col-4">
-              <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
+                <p-message severity="error" text="Data de validade obrigatória para produtos perecíveis"  
+                *ngIf="productForm.errors?.expirationDateRequired && (productForm.controls['expirationDate'].dirty || productForm.controls['expirationDate'].touched)"></p-message>
+                <p-message severity="info" text="Este produto está vencido" *ngIf="checkIfExpired()"></p-message>
           </div>
       </div>
 

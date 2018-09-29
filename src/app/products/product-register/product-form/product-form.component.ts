@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
 import {MessageService, SelectItem} from 'primeng/api';
-import * as Observable from 'rxjs/internal/Observable/fromEvent';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 import { Product, ProductService } from '../../product.service';
+import { perishableExpirationDateValidator } from '../../../shared/directives/perishable-expiration-date.directive';
+import { manufactureDateValidator } from '../../../shared/directives/manufacture-date.directive';
+import { unitRequiredValidator } from '../../../shared/directives/unit-required.directive';
 
 @Component({
   selector: 'app-product-form',
@@ -12,11 +13,9 @@ import { Product, ProductService } from '../../product.service';
   styleUrls: ['./product-form.component.css'],
   providers: [MessageService]
 })
-export class ProductFormComponent implements OnInit, AfterViewInit{
+export class ProductFormComponent implements OnInit{
 
   @Input() model: Product;
-  
-  @ViewChild('expiration') expiration: ElementRef;
 
   units: SelectItem[];
   productForm: FormGroup;
@@ -33,7 +32,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit{
     this.setForm();
 
     this.units = [];
-      this.units.push({label:'Selecione uma opção', value:''});
+      this.units.push({label:'Selecione uma opção', value: null});
       this.units.push({label:'Litro', value:'Lt'});
       this.units.push({label:'Quilograma', value:'Kg'});
       this.units.push({label:'Unidade', value:'Un'});
@@ -46,27 +45,26 @@ export class ProductFormComponent implements OnInit, AfterViewInit{
   
   private setForm() {
     this.productForm = this.fb.group({
-      'name': new FormControl(this.model.name, Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')])),
+      'name': new FormControl(this.model.name, Validators.compose([
+        Validators.required, 
+        Validators.maxLength(50), 
+        Validators.pattern('[a-zA-Z ]*')
+      ])),
       'isPerishable': new FormControl(this.model.isPerishable),
       'quantity': new FormControl(this.model.quantity),
-      'unit': new FormControl(this.model.unit ? this.model.unit : {value: ''}, Validators.required),
+      'unit': new FormControl(this.model.unit ? this.model.unit : {value: null}, unitRequiredValidator()),
       'price': new FormControl(this.model.price, Validators.required),
       'expirationDate': new FormControl(''),
-      'manifactureDate': new FormControl('', Validators.required)
-    });
+      'manufactureDate': new FormControl('', Validators.required)
+    }, {validator: Validators.compose([
+      perishableExpirationDateValidator, manufactureDateValidator
+      ])});
   }
 
-  ngAfterViewInit() {
-    Observable.fromEvent(this.expiration.nativeElement, 'oninput')
-              .pipe(debounceTime(100), distinctUntilChanged())
-    //           .subscribe(() => {
-    //             this.checkIfExpired(this.expiration.nativeElement.value);
-    //           });
 
-    // this.teste.subscribe(() => console.log("agora vai!"))
-  }
-  checkIfExpired(value: any): any {
-    console.log(value)
+  checkIfExpired() {
+    const expirationDate = this.productForm.get('expirationDate').value;
+    return expirationDate && expirationDate < new Date() 
   }
 
   onSubmit(value: Product) { 
