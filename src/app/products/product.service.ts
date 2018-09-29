@@ -10,7 +10,7 @@ export class Product {
   public price: number;
   public isPerishable: boolean;
   public expirationDate: Date;
-  public manifactureDate: Date;
+  public manufactureDate: Date;
   
   constructor (){}
 }

@@ -35,7 +35,7 @@ export class ProductsTableComponent implements OnInit, AfterViewInit {
           { field: 'unit', header: 'Unidade', isGeneral:true },
           { field: 'price', header: 'Preço', isCurrency: true },
           { field: 'isPerishable', header: 'Perecível', isBoolean: true },
-          { field: 'manifactureDate', header: 'Data de Fabricação', isDate: true },
+          { field: 'manufactureDate', header: 'Data de Fabricação', isDate: true },
           { field: 'expirationDate', header: 'Data de Validade', isDate: true }
       ];
   }
