@@ -20,6 +20,7 @@ export class ProductFormComponent implements OnInit{
   units: SelectItem[];
   productForm: FormGroup;
   selectedUnit: any;
+  msgs: any[] = [];
 
    constructor(
     private service: ProductService,
@@ -33,9 +34,9 @@ export class ProductFormComponent implements OnInit{
 
     this.units = [];
       this.units.push({label:'Selecione uma opção', value: null});
-      this.units.push({label:'Litro', value:'Lt'});
-      this.units.push({label:'Quilograma', value:'Kg'});
-      this.units.push({label:'Unidade', value:'Un'});
+      this.units.push({label:'Litro', value:'Litro'});
+      this.units.push({label:'Quilograma', value:'Quilograma'});
+      this.units.push({label:'Unidade', value:'Unidade'});
 
     this.selectedUnit = this.units[0];
 
@@ -48,7 +49,7 @@ export class ProductFormComponent implements OnInit{
       'name': new FormControl(this.model.name, Validators.compose([
         Validators.required, 
         Validators.maxLength(50), 
-        Validators.pattern('[a-zA-Z ]*')
+        Validators.pattern('[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]*')
       ])),
       'isPerishable': new FormControl(this.model.isPerishable),
       'quantity': new FormControl(this.model.quantity),
@@ -75,8 +76,12 @@ export class ProductFormComponent implements OnInit{
       this.model.id = this.generateId();
       isNew = true;
     }
-    this.service.saveProduct(this.model.id, this.model);
-    this.messageService.add({severity:'info', summary:'Success', detail:'Form Submitted'});
+    try {
+      this.service.saveProduct(this.model.id, this.model);
+      this.msgs = [{severity:'info', detail:'Produto salvo com sucesso!'}];
+    } catch (error) {
+      this.msgs = [{severity:'error', detail:'Erro ao salvar produto.'}];
+    }
     if(isNew){
       this.resetForm();
     }
@@ -91,6 +96,4 @@ export class ProductFormComponent implements OnInit{
     return (Date.now().toString(36) + Math.random().toString(36).substr(2)).toUpperCase();
   }
 
-
-  get diagnostic() { return JSON.stringify(this.productForm.value); }
 }

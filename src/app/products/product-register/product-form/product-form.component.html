@@ -1,135 +1,143 @@
 <form id="my-form" [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
-  <p-panel header="Cadastro do Produto">
-    <div style="text-align:center;margin-top:20px" *ngIf="submitted">
-        Form Submitted
-        <br>
-        {{diagnostic}}
-    </div>
-    <div>
-      <p>*campos obrigatórios</p>
-    </div>
-    <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
-      
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-              Nome do Produto *:
-          </div>
-          <div class="ui-grid-col-6">
-              <input id="name" type="text" pInputText formControlName="name" placeholder="Obrigatório" maxlength="50">
-          </div>
-          <div class="ui-grid-col-4">
-              <p-message severity="error" 
-                        [text]="
-                          productForm.controls['name'].errors['required'] ? 'Nome do produto é obrigatório' : 
-                          productForm.controls['name'].errors['maxlength'] ? 'Não deve ter mais que 50 caracteres' : 
-                          productForm.controls['name'].errors['pattern'] ? 'Nome do produto deve ter apenas letras' : 
-                          ''"  
-                        *ngIf="!productForm.controls['name'].valid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"></p-message>
-          </div>
-      </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3"></div>
-          <div class="ui-grid-col-6">
-            <p-checkbox type="checkbox" ng-model="product.isPerishable" label="Produto perecível?" binary="true" formControlName="isPerishable"></p-checkbox>
-          </div>
-          <div class="ui-grid-col-4"></div>
-      </div>
-      
+    <p-messages [value]="msgs"></p-messages>
+    <p-panel header="Cadastro do Produto">
+        <!-- <div style="text-align:center;margin-top:20px" *ngIf="submitted">
+            Form Submitted
+        </div> -->
+        <div>
+            <p>*campos obrigatórios</p>
+        </div>
+        <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
+            
+            <!-- Product name input -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    Nome do Produto *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <input id="name" type="text" pInputText formControlName="name" placeholder="Obrigatório" maxlength="50">
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" 
+                    [text]="
+                    productForm.controls['name'].errors['required'] ? 'Nome do produto é obrigatório' : 
+                    productForm.controls['name'].errors['maxlength'] ? 'Não deve ter mais que 50 caracteres' : 
+                    productForm.controls['name'].errors['pattern'] ? 'Nome do produto deve ter apenas letras (com ou sem acento) e espaços' : 
+                    ''"  
+                    *ngIf="!productForm.controls['name'].valid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"></p-message>
+                </div>
+            </div>
+            
+            <!-- checkbox for perishable -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3"></div>
+                <div class="ui-grid-col-6">
+                    <p-checkbox type="checkbox" ng-model="product.isPerishable" label="Produto perecível?" binary="true" formControlName="isPerishable"></p-checkbox>
+                </div>
+                <div class="ui-grid-col-4"></div>
+            </div>
+            
+            <!-- Unit selector -->
             <div class="ui-grid-row">
                 <div class="ui-grid-col-3">
                     Unidade de medida *:
                 </div>
                 <div class="ui-grid-col-6">
-                  <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false" [(ngModel)]="selectedUnit"></p-dropdown>
+                    <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false" [(ngModel)]="selectedUnit"></p-dropdown>
                 </div>
                 <div class="ui-grid-col-4">
                     <p-message severity="error" text="Unidade é obrigatório" *ngIf="!productForm.controls['unit'].valid && (productForm.controls['unit'].dirty || productForm.controls['unit'].touched)"></p-message>
                 </div>
             </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-              Quantidade :
-          </div>
-          <div class="ui-grid-col-6" [ngSwitch]="selectedUnit">
-              <div class="ui-inputgroup" *ngSwitchCase="'Lt'">
-                  <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
-                  <span class="ui-inputgroup-addon">Lt</span>
-              </div>
-              <div class="ui-inputgroup" *ngSwitchCase="'Kg'">
-                <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
-                <span class="ui-inputgroup-addon">Kg</span>
-              </div>
-              <div class="ui-inputgroup" *ngSwitchCase="'Un'">
-                <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', allowNegative: 'false', precision: '0'}">
-                <span class="ui-inputgroup-addon">Un</span>
-              </div>
-              <input id="quantity" type="number" pInputText formControlName="quantity" *ngSwitchDefault disabled>
-          </div>
-          <div class="ui-grid-col-4">
-          </div>
-      </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-              Preço *:
-          </div>
-          <div class="ui-grid-col-6">
-              <div class="ui-inputgroup">
-                <span class="ui-inputgroup-addon">R$</span>
-                <input currencyMask id="price" pInputText formControlName="price" placeholder="Obrigatório" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false' }"/>
-              </div>
-          </div>
-          <div class="ui-grid-col-4">
-              <p-message severity="error" text="Preço é obrigatório" *ngIf="!productForm.controls['price'].valid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)"></p-message>
-          </div>
-      </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-              Data de Fabricação *:
-          </div>
-          <div class="ui-grid-col-6">
-            <p-calendar id="manufacture" type="date" name="manufacture" dateFormat="dd/mm/yy" formControlName="manufactureDate" placeholder="Obrigatório"></p-calendar>
-          </div>
-          <div class="ui-grid-col-4">
-              <p-message severity="error" 
-              [text]="
-                productForm.controls['manufactureDate'].errors?.required ? 'Data de fabricação é obrigatória' : 
-                productForm.errors?.manufactureDateInvalid ? 'Data de fabricação não pode ser maior que a de validade' : 
-                ''"    
-              *ngIf="(!productForm.controls['manufactureDate'].valid || productForm.errors?.manufactureDateInvalid) && (productForm.controls['manufactureDate'].dirty || productForm.controls['manufactureDate'].touched)"></p-message>
-          </div>
-      </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3">
-              Data de Validade *:
-          </div>
-          <div class="ui-grid-col-6">
-              <p-calendar id="expiration" type="date" ng-required="product.isPerishable" formControlName="expirationDate" dateFormat="dd/mm/yy" placeholder="Obrigatório se perecível" #expiration (onFocus)="teste"></p-calendar>
-          </div>
-          <div class="ui-grid-col-4">
-                <p-message severity="error" text="Data de validade obrigatória para produtos perecíveis"  
-                *ngIf="productForm.errors?.expirationDateRequired && (productForm.controls['expirationDate'].dirty || productForm.controls['expirationDate'].touched)"></p-message>
-                <p-message severity="info" text="Este produto está vencido" *ngIf="checkIfExpired()"></p-message>
-          </div>
-      </div>
-
-      <div class="ui-grid-row">
-          <div class="ui-grid-col-3"></div>
-          <div class="ui-grid-col-3">
-            <button pButton type="submit" label="Salvar" [disabled]="!productForm.valid" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
-          </div>
-          <div class="ui-grid-col-3">
-            <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
-          </div>
-          <div class="ui-grid-col-4"></div>
-      </div>
-
-    </div>
-  </p-panel>
+            
+            <!-- Quantity input -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    Quantidade :
+                </div>
+                <div class="ui-grid-col-6" [ngSwitch]="selectedUnit">
+                    <div class="ui-inputgroup" *ngSwitchCase="'Lt'">
+                        <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
+                        <span class="ui-inputgroup-addon">Lt</span>
+                    </div>
+                    <div class="ui-inputgroup" *ngSwitchCase="'Kg'">
+                        <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
+                        <span class="ui-inputgroup-addon">Kg</span>
+                    </div>
+                    <div class="ui-inputgroup" *ngSwitchCase="'Un'">
+                        <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', allowNegative: 'false', precision: '0'}">
+                        <span class="ui-inputgroup-addon">Un</span>
+                    </div>
+                    <input id="quantity" type="number" pInputText formControlName="quantity" *ngSwitchDefault disabled>
+                </div>
+                <div class="ui-grid-col-4">
+                </div>
+            </div>
+            
+            <!-- Price input -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    Preço *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">R$</span>
+                        <input currencyMask id="price" pInputText formControlName="price" placeholder="Obrigatório" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false' }"/>
+                    </div>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Preço é obrigatório" *ngIf="!productForm.controls['price'].valid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)"></p-message>
+                </div>
+            </div>
+            
+            <!-- Manufacture date input -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    Data de Fabricação *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <p-calendar id="manufacture" type="date" name="manufacture" dateFormat="dd/mm/yy" formControlName="manufactureDate" placeholder="Obrigatório"></p-calendar>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" 
+                    [text]="
+                    productForm.controls['manufactureDate'].errors?.required ? 'Data de fabricação é obrigatória' : 
+                    productForm.errors?.manufactureDateInvalid ? 'Data de fabricação não pode ser maior que a de validade' : 
+                    ''"    
+                    *ngIf="(!productForm.controls['manufactureDate'].valid || productForm.errors?.manufactureDateInvalid) && (productForm.controls['manufactureDate'].dirty || productForm.controls['manufactureDate'].touched)"></p-message>
+                </div>
+            </div>
+            
+            <!-- Expiration date input -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3">
+                    Data de Validade *:
+                </div>
+                <div class="ui-grid-col-6">
+                    <p-calendar id="expiration" type="date" ng-required="product.isPerishable" formControlName="expirationDate" dateFormat="dd/mm/yy" placeholder="Obrigatório se perecível" #expiration (onFocus)="teste"></p-calendar>
+                </div>
+                <div class="ui-grid-col-4">
+                    <p-message severity="error" text="Data de validade obrigatória para produtos perecíveis" *ngIf="productForm.errors?.expirationDateRequired && (productForm.controls['expirationDate'].dirty || productForm.controls['expirationDate'].touched)"></p-message>
+                    <p-message severity="info" text="Este produto está vencido" *ngIf="checkIfExpired()"></p-message>
+                </div>
+            </div>
+            
+            <!-- Buttons -->
+            <div class="ui-grid-row">
+                <div class="ui-grid-col-3"></div>
+                <div class="ui-grid-col-3">
+                    <!-- Save button - submit -->
+                    <button pButton type="submit" label="Salvar" [disabled]="!productForm.valid" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+                </div>
+                <div class="ui-grid-col-3">
+                    <!-- Cancel button - return to table's page -->
+                    <button pButton routerLink="" label="Cancelar" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+                </div>
+                <div class="ui-grid-col-4"></div>
+            </div>
+            
+        </div>
+    </p-panel>
 </form>
 
 
