@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
+<form id="my-form" [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
   <p-panel header="Cadastro do Produto">
     <div style="text-align:center;margin-top:20px" *ngIf="submitted">
         Form Submitted
@@ -41,7 +41,7 @@
                     Unidade de medida *:
                 </div>
                 <div class="ui-grid-col-6">
-                  <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false"></p-dropdown>
+                  <p-dropdown id="unit" [options]="units" formControlName="unit" [autoWidth]="false" [(ngModel)]="selectedUnit"></p-dropdown>
                 </div>
                 <div class="ui-grid-col-4">
                     <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->
@@ -52,8 +52,20 @@
           <div class="ui-grid-col-3">
               Quantidade :
           </div>
-          <div class="ui-grid-col-6">
-              <input id="quantity" type="number" pInputText size="30" formControlName="quantity">
+          <div class="ui-grid-col-6" [ngSwitch]="selectedUnit">
+              <div class="ui-inputgroup" *ngSwitchCase="'Lt'">
+                  <input id="quantity" type="number" pInputText formControlName="quantity">
+                  <span class="ui-inputgroup-addon">Lt</span>
+              </div>
+              <div class="ui-inputgroup" *ngSwitchCase="'Kg'">
+                <input id="quantity" type="number" pInputText formControlName="quantity">
+                <span class="ui-inputgroup-addon">Kg</span>
+              </div>
+              <div class="ui-inputgroup" *ngSwitchCase="'Un'">
+                <input id="quantity" type="number" pInputText formControlName="quantity">
+                <span class="ui-inputgroup-addon">Un</span>
+              </div>
+              <input id="quantity" type="number" pInputText formControlName="quantity" *ngSwitchDefault disabled>
           </div>
           <div class="ui-grid-col-4">
               <!-- <p-message severity="error" text="Nome do Produto é obrigatório" *ngIf="!productForm.controls['firstname'].valid&&productForm.controls['firstname'].dirty"></p-message> -->

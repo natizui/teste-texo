@@ -20,7 +20,7 @@ export class ProductFormComponent implements OnInit, AfterViewInit{
 
   units: SelectItem[];
   productForm: FormGroup;
-  teste: EventEmitter<any>;
+  selectedUnit: any;
 
    constructor(
     private service: ProductService,
@@ -33,18 +33,23 @@ export class ProductFormComponent implements OnInit, AfterViewInit{
     this.setForm();
 
     this.units = [];
-        this.units.push({label:'Selecione uma opção', value:''});
-        this.units.push({label:'Litro', value:'Litro'});
-        this.units.push({label:'Quilograma', value:'Quilograma'});
-        this.units.push({label:'Unidade', value:'Unidade'});
+      this.units.push({label:'Selecione uma opção', value:''});
+      this.units.push({label:'Litro', value:'Lt'});
+      this.units.push({label:'Quilograma', value:'Kg'});
+      this.units.push({label:'Unidade', value:'Un'});
+
+    this.selectedUnit = this.units[0];
+
   }
+
+  
   
   private setForm() {
     this.productForm = this.fb.group({
       'name': new FormControl(this.model.name, Validators.compose([Validators.required, Validators.maxLength(50), Validators.pattern('[a-zA-Z ]*')])),
       'isPerishable': new FormControl(this.model.isPerishable),
       'quantity': new FormControl(this.model.quantity),
-      'unit': new FormControl(this.model.unit, Validators.required),
+      'unit': new FormControl(this.model.unit ? this.model.unit : {value: ''}, Validators.required),
       'price': new FormControl(this.model.price, Validators.required),
       'expirationDate': new FormControl(''),
       'manifactureDate': new FormControl('', Validators.required)
