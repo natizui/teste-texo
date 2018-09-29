@@ -54,15 +54,15 @@
           </div>
           <div class="ui-grid-col-6" [ngSwitch]="selectedUnit">
               <div class="ui-inputgroup" *ngSwitchCase="'Lt'">
-                  <input id="quantity" type="number" pInputText formControlName="quantity">
+                  <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
                   <span class="ui-inputgroup-addon">Lt</span>
               </div>
               <div class="ui-inputgroup" *ngSwitchCase="'Kg'">
-                <input id="quantity" type="number" pInputText formControlName="quantity">
+                <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', decimal: ',', allowNegative: 'false', precision: '3'}">
                 <span class="ui-inputgroup-addon">Kg</span>
               </div>
               <div class="ui-inputgroup" *ngSwitchCase="'Un'">
-                <input id="quantity" type="number" pInputText formControlName="quantity">
+                <input currencyMask id="quantity" pInputText formControlName="quantity" [options]="{ prefix: ' ', thousands: '.', allowNegative: 'false', precision: '0'}">
                 <span class="ui-inputgroup-addon">Un</span>
               </div>
               <input id="quantity" type="number" pInputText formControlName="quantity" *ngSwitchDefault disabled>
