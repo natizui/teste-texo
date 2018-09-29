@@ -1,1 +1,2 @@
-<p-menu [model]="items"></p-menu>
+<button #btn type="button" pButton icon="pi pi-bars" (click)="menuToggle()" ></button>
+<p-menu #menu [model]="items" [popup]="popup"></p-menu>

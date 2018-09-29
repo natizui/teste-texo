@@ -72,7 +72,7 @@ export class ProductsTableComponent implements OnInit, AfterViewInit {
         try {
           this.productService.deleteProduct(product.id);
           this.updatePage();
-          this.msgs = [{severity:'info', detail:'Produto excluído'}];
+          this.msgs = [{severity:'success', detail:'Produto excluído'}];
         } catch (error) {
           this.msgs = [{severity:'error', detail:'Erro ao excluir'}];
         }

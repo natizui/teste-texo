@@ -38,12 +38,16 @@ export class ProductFormComponent implements OnInit{
       this.units.push({label:'Quilograma', value:'Kg'});
       this.units.push({label:'Unidade', value:'Un'});
 
-    this.selectedUnit = this.model.unit;
+    this.setSelectedUnit();
 
   }
 
   
   
+  private setSelectedUnit() {
+    this.selectedUnit = this.model.unit;
+  }
+
   private setForm() {
     this.productForm = this.fb.group({
       'name': new FormControl(this.model.name, Validators.compose([
@@ -78,7 +82,7 @@ export class ProductFormComponent implements OnInit{
     }
     try {
       this.service.saveProduct(this.model.id, this.model);
-      this.msgs = [{severity:'info', detail:'Produto salvo com sucesso!'}];
+      this.msgs = [{severity:'success', detail:'Produto salvo com sucesso!'}];
     } catch (error) {
       this.msgs = [{severity:'error', detail:'Erro ao salvar produto.'}];
     }
@@ -90,6 +94,7 @@ export class ProductFormComponent implements OnInit{
   private resetForm() {
     this.model = new Product();
     this.setForm();
+    this.setSelectedUnit();
   }
 
   private generateId() {

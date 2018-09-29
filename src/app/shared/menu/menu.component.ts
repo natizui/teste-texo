@@ -8,12 +8,17 @@ import { MenuItem } from 'primeng/components/common/menuitem';
 })
 export class MenuComponent implements OnInit {
   items: MenuItem[];
+  popup: boolean;
 
   ngOnInit() {
       this.items = [
           {label: 'Produtos', routerLink: ['/produtos']},
           {label: 'Cadastro', routerLink: ['/produtos/cadastro']},
       ];
+  }
+
+  menuToggle() {
+    this.popup = !this.popup;
   }
 
 }
