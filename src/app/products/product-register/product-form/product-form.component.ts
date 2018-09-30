@@ -59,13 +59,19 @@ export class ProductFormComponent implements OnInit{
       'quantity': new FormControl(this.model.quantity),
       'unit': new FormControl(this.model.unit ? this.model.unit : {value: null}, unitRequiredValidator()),
       'price': new FormControl(this.model.price, Validators.required),
-      'expirationDate': new FormControl(''),
-      'manufactureDate': new FormControl('', Validators.required)
+      'expirationDate': new FormControl(this.toDate(this.model.expirationDate)),
+      'manufactureDate': new FormControl(this.toDate(this.model.manufactureDate), Validators.required)
     }, {validator: Validators.compose([
       perishableExpirationDateValidator, manufactureDateValidator
       ])});
   }
 
+
+  private toDate(date: any) {
+    if (date != undefined && !isNaN(Date.parse(date.toString()))) {
+      return new Date(date);
+    }
+  }
 
   checkIfExpired() {
     const expirationDate = this.productForm.get('expirationDate').value;

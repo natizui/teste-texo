@@ -9,8 +9,8 @@ export class Product {
   public unit: string;
   public price: number;
   public isPerishable: boolean;
-  public expirationDate: Date;
-  public manufactureDate: Date;
+  public expirationDate: any;
+  public manufactureDate: any;
   
   constructor (){}
 }
