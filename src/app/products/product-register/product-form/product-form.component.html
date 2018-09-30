@@ -1,12 +1,7 @@
 <form id="my-form" [formGroup]="productForm" (ngSubmit)="onSubmit(productForm.value)">
     <p-messages [value]="msgs"></p-messages>
     <p-panel header="Cadastro do Produto">
-        <!-- <div style="text-align:center;margin-top:20px" *ngIf="submitted">
-            Form Submitted
-        </div> -->
-        <div>
-            <p>*campos obrigatórios</p>
-        </div>
+
         <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid">
             
             <!-- Product name input -->
@@ -120,6 +115,10 @@
                     <p-message severity="error" text="Data de validade obrigatória para produtos perecíveis" *ngIf="productForm.errors?.expirationDateRequired && (productForm.controls['expirationDate'].dirty || productForm.controls['expirationDate'].touched)"></p-message>
                     <p-message severity="info" text="Este produto está vencido" *ngIf="checkIfExpired()"></p-message>
                 </div>
+            </div>
+            
+            <div>
+                <p>*campos obrigatórios</p>
             </div>
             
             <!-- Buttons -->

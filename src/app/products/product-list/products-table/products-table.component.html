@@ -1,16 +1,16 @@
 <div class="ui-g">
   <div class="ui-g-12">
     <p-messages [value]="msgs" class="ui-g-6"></p-messages>
-    <div id="search-container" class="ui-g-4 ui-md-offset-2">
+    <div id="search-container" class="ui-g-6">
       <input type="text" pInputText placeholder="Busca" #search>   
       <button pButton type="button" icon="pi pi-search"></button>
     </div>
   </div>
 
-  <p-table [columns]="cols" [value]="tableProducts" [responsive]="true"  [resizableColumns]="true" [scrollable]="true" scrollHeight="25vh"  >
+  <p-table [columns]="cols" [value]="tableProducts" [scrollable]="true" scrollHeight="25vh" [style]="{width:'350px'}" >
     <ng-template pTemplate="colgroup" let-columns>
       <colgroup>
-        <col *ngFor="let col of columns" [style.width]="col.width">
+        <col *ngFor="let col of columns" style="width: 100px">
       </colgroup>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
@@ -23,18 +23,17 @@
     </ng-template>
     <ng-template pTemplate="body" let-product let-columns="columns">
       <tr>
-        <td *ngFor="let col of columns" class="ui-resizable-column">
-          <span class="ui-column-title">{{col.header}}</span>
+        <td *ngFor="let col of columns">
           <span *ngIf="col.isCurrency">{{ product[col.field] | currency:'BRL':'symbol':'1.2-2':'pt' }}</span>
           <span *ngIf="col.isBoolean">{{ product[col.field] | boolean }}</span>
           <span *ngIf="col.isDate">{{ product[col.field] | date:'dd/MM/yy' }}</span>
           <span *ngIf="col.isGeneral">{{ product[col.field] }}</span>
-        </td>
-        <td class="ui-resizable-column">
-          <!-- edit button -->
-          <button pButton [routerLink]="['/produtos', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
-          <!-- delete button -->
-          <button pButton (click)="confirm(product)" icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+          <div *ngIf="col.isAction">
+            <!-- edit button -->
+            <button pButton [routerLink]="['/produtos', product.id]" icon="pi pi-pencil" class="ui-button-icon ui-button-raised ui-button-rounded ui-button-secondary"></button>
+            <!-- delete button -->
+            <button pButton (click)="confirm(product)" icon="pi pi-times-circle" class="ui-button-raised ui-button-rounded ui-button-secondary"></button>
+          </div>
         </td>
       </tr>
     </ng-template>
