@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductsTableComponent } from './products-table.component';
+import { ProductTableComponent } from './product-table.component';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
 import { BooleanPipe } from '../../../shared/pipes/boolean/boolean.pipe';
@@ -20,16 +20,16 @@ import { PanelModule } from 'primeng/panel';
 import { APP_BASE_HREF } from '@angular/common';
 
 describe('ProductsTableComponent', () => {
-  let component: ProductsTableComponent;
-  let fixture: ComponentFixture<ProductsTableComponent>;
+  let component: ProductTableComponent;
+  let fixture: ComponentFixture<ProductTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ 
-        ProductsTableComponent,
+        ProductTableComponent,
         BooleanPipe ,
         ProductListComponent,
-        ProductsTableComponent,
+        ProductTableComponent,
         ProductRegisterComponent,
         ProductFormComponent
       ],
@@ -54,7 +54,7 @@ describe('ProductsTableComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductsTableComponent);
+    fixture = TestBed.createComponent(ProductTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

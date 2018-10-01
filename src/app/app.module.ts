@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProductFormComponent } from './products/product-register/product-form/product-form.component';
-import { ProductsTableComponent } from './products/product-list/products-table/products-table.component';
+import { ProductTableComponent } from './products/product-list/product-table/product-table.component';
 import { ProductRegisterComponent } from './products/product-register/product-register.component';
 import { MenuComponent } from './shared/menu/menu.component';
 import { ProductService } from './products/product.service';
@@ -37,7 +37,7 @@ registerLocaleData(localeBr, 'pt');
     AppComponent,
     ProductListComponent,
     ProductFormComponent,
-    ProductsTableComponent,
+    ProductTableComponent,
     ProductRegisterComponent,
     MenuComponent,
     BooleanPipe

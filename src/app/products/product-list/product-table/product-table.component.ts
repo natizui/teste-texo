@@ -6,12 +6,12 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 
 @Component({
-  selector: 'app-products-table',
-  templateUrl: './products-table.component.html',
-  styleUrls: ['./products-table.component.css'],
+  selector: 'app-product-table',
+  templateUrl: './product-table.component.html',
+  styleUrls: ['./product-table.component.css'],
   providers: [ConfirmationService]
 })
-export class ProductsTableComponent implements OnInit, AfterViewInit {
+export class ProductTableComponent implements OnInit, AfterViewInit {
 
   @ViewChild('search') search: ElementRef;
 

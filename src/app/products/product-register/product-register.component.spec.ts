@@ -13,7 +13,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
 import { AppRoutingModule } from '../../app-routing.module';
 import { ProductListComponent } from '../product-list/product-list.component';
-import { ProductsTableComponent } from '../product-list/products-table/products-table.component';
+import { ProductTableComponent } from '../product-list/product-table/product-table.component';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { BooleanPipe } from '../../shared/pipes/boolean/boolean.pipe';
@@ -30,7 +30,7 @@ describe('ProductRegisterComponent', () => {
         ProductRegisterComponent,
         ProductFormComponent,
         ProductListComponent,
-        ProductsTableComponent,
+        ProductTableComponent,
         BooleanPipe
       ],
       imports: [

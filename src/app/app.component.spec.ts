@@ -6,7 +6,7 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductRegisterComponent } from './products/product-register/product-register.component';
 import { MenuModule } from 'primeng/menu';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { ProductsTableComponent } from './products/product-list/products-table/products-table.component';
+import { ProductTableComponent } from './products/product-list/product-table/product-table.component';
 import { ProductFormComponent } from './products/product-register/product-form/product-form.component';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
@@ -28,7 +28,7 @@ describe('AppComponent', () => {
         MenuComponent,
         ProductListComponent,
         ProductRegisterComponent,
-        ProductsTableComponent,
+        ProductTableComponent,
         ProductFormComponent,
         BooleanPipe
       ],

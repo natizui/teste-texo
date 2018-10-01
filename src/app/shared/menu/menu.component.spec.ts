@@ -7,7 +7,7 @@ import { AppRoutingModule } from '../../app-routing.module';
 import { ProductFormComponent } from '../../products/product-register/product-form/product-form.component';
 import { ProductListComponent } from '../../products/product-list/product-list.component';
 import { ProductRegisterComponent } from '../../products/product-register/product-register.component';
-import { ProductsTableComponent } from '../../products/product-list/products-table/products-table.component';
+import { ProductTableComponent } from '../../products/product-list/product-table/product-table.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
@@ -33,7 +33,7 @@ describe('MenuComponent', () => {
         ProductFormComponent,
         ProductListComponent,
         ProductRegisterComponent,
-        ProductsTableComponent,
+        ProductTableComponent,
         BooleanPipe 
       ],
       imports: [

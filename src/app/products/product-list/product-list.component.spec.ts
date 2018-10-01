@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductListComponent } from './product-list.component';
 import { BreadcrumbModule } from 'primeng/breadcrumb';
-import { ProductsTableComponent } from './products-table/products-table.component';
+import { ProductTableComponent } from './product-table/product-table.component';
 import { MessagesModule } from 'primeng/messages';
 import { TableModule } from 'primeng/table';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -27,7 +27,7 @@ describe('ProductListComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ 
         ProductListComponent,
-        ProductsTableComponent ,
+        ProductTableComponent ,
         BooleanPipe,
         ProductRegisterComponent,
         ProductFormComponent

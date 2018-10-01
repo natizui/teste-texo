@@ -2,12 +2,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: blue; */
   margin-top: 2vh;
 }
 
 .table-container {
-  /* border: red solid 1px; */
   width: 100%;
   display: flex;
   justify-content: center;
