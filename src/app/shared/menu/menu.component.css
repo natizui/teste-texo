@@ -1,0 +1,18 @@
+#togglemenu {
+  display: initial;
+}
+#menu-container {
+  display: none;
+}
+
+@media(min-width: 640px){
+  #togglemenu {
+    display: none;
+  }
+  #menu-container {
+    display: initial;
+  }
+  /* #menu-container > div {
+    height: 0px;
+  } */
+}

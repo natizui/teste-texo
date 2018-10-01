@@ -1,6 +1,33 @@
-#search-conponent {
+#search-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: blue;
+  /* background: blue; */
+  margin-top: 2vh;
+}
+
+.table-container {
+  /* border: red solid 1px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.1rem;
+}
+
+#table {
+  width: 100vw;
+}
+
+@media(min-width: 640px){
+
+  #table {
+    width: 70vw;
+  }
+}
+
+@media(min-width: 1024px){
+  #table {
+    width: 800px;
+  }
 }

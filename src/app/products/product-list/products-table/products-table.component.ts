@@ -30,14 +30,14 @@ export class ProductsTableComponent implements OnInit, AfterViewInit {
       console.log(this.products);
 
       this.cols = [
-          { field: 'name', header: 'Produto', isGeneral:true, width: '100px'},
-          { field: 'quantity', header: 'Quantidade', isGeneral:true, width: '100px'},
-          { field: 'unit', header: 'Unidade', isGeneral:true, width: '100px'},
-          { field: 'price', header: 'Preço', isCurrency: true, width: '100px'},
-          { field: 'isPerishable', header: 'Perecível', isBoolean: true, width: '100px'},
-          { field: 'manufactureDate', header: 'Data de Fabricação', isDate: true, width: '100px'},
-          { field: 'expirationDate', header: 'Data de Validade', isDate: true, width: '100px'},
-          { header: '', isAction: true, width: '60px'}
+        { header: '', isAction: true, width: '60px'},
+        { field: 'name', header: 'Produto', isGeneral:true, width: '100px'},
+        { field: 'quantity', header: 'Quantidade', isGeneral:true, width: '100px'},
+        { field: 'unit', header: 'Unidade', isGeneral:true, width: '100px'},
+        { field: 'price', header: 'Preço', isCurrency: true, width: '100px'},
+        { field: 'isPerishable', header: 'Perecível', isBoolean: true, width: '100px'},
+        { field: 'manufactureDate', header: 'Data de Fabricação', isDate: true, width: '100px'},
+        { field: 'expirationDate', header: 'Data de Validade', isDate: true, width: '100px'},
       ];
   }
 
