@@ -21,10 +21,4 @@ export class ProductListComponent implements OnInit {
     this.home = {icon: 'pi pi-home'};
   }
 
-  // settingsBreadCrumb = {
-  //   breadcrumb: [
-  //     {label: 'Produtos', href: '/produtos', active: true}
-  //   ]
-  // }
-
 }

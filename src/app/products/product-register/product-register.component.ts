@@ -50,13 +50,6 @@ export class ProductRegisterComponent implements OnInit {
     );
   }
 
-  
-  // settingsBreadCrumb = {
-  //   breadcrumb: [
-  //     {label: 'Produtos', href: '/produtos', active: false},
-  //     {label: 'Cadastro', href: '/produtos/cadastro', active: true}
-  //   ]
-  // }
-  
+ 
   
 }

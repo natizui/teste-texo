@@ -14,7 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from 'primeng/message';
 import { CheckboxModule } from 'primeng/checkbox';
 import { DropdownModule } from 'primeng/dropdown';
-import { CurrencyMaskDirective, CurrencyMaskModule } from 'ng2-currency-mask';
+import { CurrencyMaskModule } from 'ng2-currency-mask';
 import { CalendarModule } from 'primeng/calendar';
 import { PanelModule } from 'primeng/panel';
 import { APP_BASE_HREF } from '@angular/common';
