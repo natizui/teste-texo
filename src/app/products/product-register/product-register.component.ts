@@ -43,7 +43,11 @@ export class ProductRegisterComponent implements OnInit {
 
   private loadProductForEdit() {
     this.product$ = this.route.paramMap.pipe(switchMap((params: ParamMap) => this.service.getProduct(params.get('id'))));
-    this.product$.subscribe(prod => this.model = prod);
+    this.product$.subscribe(
+      prod => {
+        prod ? this.model = prod : ''; //to make sure that model is mot null
+      }
+    );
   }
 
   

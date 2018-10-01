@@ -29,6 +29,9 @@ export class ProductFormComponent implements OnInit{
   ) {}
   
   ngOnInit(){
+    if(!this.model){
+      this.model = new Product();
+    }
     
     this.setForm();
 
